@@ -315,7 +315,7 @@ class TSMasterDevice():
         else:
             raise "HW CONNECT FAILED"
 
-    def recv(self, channel = 0,timeout: Optional[float] = 0.1) -> Message or None:
+    def recv(self, channel = 0,timeout: Optional[float] = 0.1) -> Union[Message , None]:
         start_time = time.perf_counter()
         while time.perf_counter() - start_time<= timeout:
             ACANFD = (TLIBCANFD*1)()
