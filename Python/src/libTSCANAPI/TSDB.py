@@ -29,7 +29,8 @@ def tosun_convert_msg(msg):
             is_remote_frame=msg.FProperties & 0x02,
             channel=msg.FIdxChn,
             dlc=DLC_DATA_BYTE_CNT[msg.FDLC],
-            data=bytes(msg.FData),
+            #data=bytes(msg.FData),
+            data=bytes(msg.FData[:DLC_DATA_BYTE_CNT[msg.FDLC]]), #仅从FData里获取符合该报文长度的数据
             is_fd=msg.FFDProperties & 0x01,
             is_rx=False if msg.FProperties & 0x01 else True,
             bitrate_switch=msg.FFDProperties & 0x02,
