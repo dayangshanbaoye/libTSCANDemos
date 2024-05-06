@@ -30,10 +30,10 @@ class libtosunBus(can.BusABC):
             is_cyclic: bool = False) -> None:
         self.device.send_msg(msg, timeout, sync, is_cyclic)
 
-    def recv(self, channel=0, timeout: Optional[float] = 0.1) -> Message or None:
+    def recv(self, channel=0, timeout: Optional[float] = 0.1) -> Union[Message , None]:
         return self._recv_internal(channel = channel,timeout=timeout)
     
-    def _recv_internal(self, channel=0, timeout: Optional[float] = 0.1) -> Tuple[Optional[can.Message], bool] or Tuple[None,bool]:
+    def _recv_internal(self, channel=0, timeout: Optional[float] = 0.1) -> Union[Tuple[Optional[can.Message], bool], Tuple[None, bool]]:
         return self.device.recv(channel=channel,timeout = timeout), False
 
     def shutdown(self) -> None:
